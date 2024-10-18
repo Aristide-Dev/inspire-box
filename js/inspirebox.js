@@ -22,6 +22,7 @@ jQuery(document).ready(function($) {
             if (data && data.length) {
                 const randomIndex = Math.floor(Math.random() * data.length);
                 const quote = data[randomIndex];
+
                 $('#inspirebox').hide().fadeIn(1000);
                 $('#inspirebox').html(`<p class="quote">${quote}</p>`);
     
@@ -31,7 +32,11 @@ jQuery(document).ready(function($) {
 
                 // Enregistrer que la citation a été vue
                 setQuoteSeen();
+            }else{
+                $('#inspirebox').hide();
             }
         });
+    }else{
+        $('#inspirebox').hide();
     }
 });
