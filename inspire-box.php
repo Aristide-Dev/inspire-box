@@ -3,7 +3,7 @@
  * Plugin Name: InspireBox
  * Plugin URI: https://aristech-dev.com/
  * Description: Un plugin pour afficher des citations inspirantes dans une petite fenêtre pour les visiteurs du site.
- * Version: 1.0
+ * Version: 1.2.0
  * Author: Aristide Gnimassou
  * Author URI: https://aristech-dev.com/
  * License: MIT
@@ -21,8 +21,16 @@ function inspirebox_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'inspirebox_enqueue_scripts' );
 
+// Shortcode to display the inspiration quote
+function inspiration_quotes_display() {
+    ob_start(); ?>
+    <div id="inspiration-quote" class="inspiration-quote"></div>
+    <?php return ob_get_clean();
+}
+add_shortcode('inspiration_quote', 'inspiration_quotes_display');
+
 // Fonction pour afficher la fenêtre
-function inspirebox_display_quote() {
+function inspirebox_display_quote_v1() {
     $quotes = array(
         "La vie est ce que vous en faites.",
         "Chaque jour est une nouvelle opportunité.",
