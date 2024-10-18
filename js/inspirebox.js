@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
                     $(boxId).fadeOut(1000, function() {
                         $(this).find('.hat').remove(); // Supprimer le chapeau lors de la disparition
                     });
-                }, 5000); // Ferme après 5 secondes
+                }, 10000); // Ferme après 10 secondes
 
                 // Enregistrer que la citation a été vue
                 setQuoteSeen(theme);
