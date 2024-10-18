@@ -21,25 +21,28 @@ function inspirebox_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'inspirebox_enqueue_scripts' );
 
-// Shortcode to display the inspiration quote
-function inspiration_quotes_display() {
-    ob_start(); ?>
-    <div id="inspiration-quote" class="inspiration-quote"></div>
-    <?php return ob_get_clean();
+// Ajouter l'affichage de la citation dans le footer
+function inspirebox_display_quote() {
+    echo '<div id="inspirebox" class="inspirebox"></div>';
 }
-add_shortcode('inspiration_quote', 'inspiration_quotes_display');
+add_action('wp_footer', 'inspirebox_display_quote');
 
-// Fonction pour afficher la fenêtre
-function inspirebox_display_quote_v1() {
-    $quotes = array(
-        "La vie est ce que vous en faites.",
-        "Chaque jour est une nouvelle opportunité.",
-        "Ne laissez pas le bruit des opinions des autres étouffer votre voix intérieure.",
-        "Soyez le changement que vous souhaitez voir dans le monde.",
-        "Rêvez grand et osez échouer."
-    );
-    $random_quote = $quotes[array_rand($quotes)];
-    echo '<div id="inspirebox" class="inspirebox">'.$random_quote.'</div>';
+// Register REST API endpoint to fetch quotes
+function inspiration_quotes_register_api() {
+    register_rest_route('inspiration/v1', '/quotes', array(
+        'methods' => 'GET',
+        'callback' => 'inspiration_quotes_get_quotes',
+    ));
 }
-add_action( 'wp_footer', 'inspirebox_display_quote' );
+add_action('rest_api_init', 'inspiration_quotes_register_api');
+
+// Fonction pour récupérer les citations
+function inspiration_quotes_get_quotes() {
+    $quotes_file = plugin_dir_path(__FILE__) . 'quotes.json'; // Chemin vers le fichier JSON
+    if (file_exists($quotes_file)) {
+        $quotes = json_decode(file_get_contents($quotes_file), true);
+        return new WP_REST_Response($quotes, 200);
+    }
+    return new WP_Error('no_quotes', 'No quotes found', array('status' => 404));
+}
 ?>

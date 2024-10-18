@@ -1,11 +1,9 @@
-// inspirebox.js
 jQuery(document).ready(function($) {
-    console.log('inspire box script started');
-    // Afficher la fenêtre avec un effet de fade-in
-    $('#inspirebox').hide().fadeIn(1000);
-    
-    // Optionnel : Fermer la fenêtre après quelques secondes
-    setTimeout(function() {
-        $('#inspirebox').fadeOut(1000);
-    }, 5000); // Ferme après 5 secondes
+    $.get('/wp-json/inspiration/v1/quotes', function(data) {
+        if (data && data.length) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const quote = data[randomIndex];
+            $('#inspirebox').html(`<p class="quote">${quote}</p>`);
+        }
+    });
 });
