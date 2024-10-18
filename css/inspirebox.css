@@ -2,13 +2,14 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.355);
     border: 1px solid #ccc;
-    padding: 10px 15px;
+    padding: 20px 25px;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(80, 137, 177, 0.401);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 300px;
     z-index: 9999;
+    transition: background-color 0.3s ease;
 }
 
 .inspirebox p {
@@ -16,4 +17,77 @@
     margin: 0;
     color: #333;
     text-align: center;
+}
+
+
+/* Styles pour Halloween */
+
+.halloween {
+    background-color: #f7f262;
+    /* Jaune pour Halloween */
+    border: 2px solid #ff9900;
+    /* Pour cacher les éléments dépassant */
+}
+
+
+/* Styles pour Noël */
+
+.noel {
+    background-color: #FCA5A5;
+    /* Bleu clair pour Noël */
+    border: 2px solid #ff0606;
+    /* Pour cacher les éléments dépassant */
+}
+
+
+/* Animation pour le chapeau de Noël */
+
+.noel .hat {
+    position: absolute;
+    top: -20px;
+    /* Ajustez la position selon votre image */
+    right: 10px;
+    /* Position à droite */
+    width: 64px;
+    /* Ajustez la taille */
+    animation: bounce 2s infinite alternate;
+    /* Animation de rebond */
+    margin-bottom: 5px;
+}
+
+
+/* Animation pour le chapeau d'Halloween */
+
+.halloween .hat {
+    position: absolute;
+    top: -20px;
+    /* Ajustez la position selon votre image */
+    left: 10px;
+    /* Position à gauche */
+    width: 64px;
+    /* Ajustez la taille */
+    animation: swing 2s infinite alternate;
+    /* Animation de balancement */
+    margin-bottom: 5px;
+}
+
+
+/* Animations */
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-15deg);
+    }
 }

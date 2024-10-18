@@ -18,12 +18,19 @@ if ( !defined( 'ABSPATH' ) ) {
 function inspirebox_enqueue_scripts() {
     wp_enqueue_style( 'inspirebox-style', plugin_dir_url( __FILE__ ) . 'css/inspirebox.css' );
     wp_enqueue_script( 'inspirebox-script', plugin_dir_url( __FILE__ ) . 'js/inspirebox.js', array('jquery'), null, true );
+
+    // Passer l'URL de l'image au script
+    wp_localize_script( 'inspirebox-script', 'InspireBox', array(
+        'pluginUrl' => plugin_dir_url( __FILE__ ),
+    ));
 }
 add_action( 'wp_enqueue_scripts', 'inspirebox_enqueue_scripts' );
 
-// Ajouter l'affichage de la citation dans le footer
+// Ajouter l'affichage des citations dans le footer
 function inspirebox_display_quote() {
     echo '<div id="inspirebox" class="inspirebox"></div>';
+    echo '<div id="halloween-box" class="inspirebox halloween"></div>';
+    echo '<div id="noel-box" class="inspirebox noel"></div>';
 }
 add_action('wp_footer', 'inspirebox_display_quote');
 
