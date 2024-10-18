@@ -6,7 +6,7 @@
     border: 1px solid #ccc;
     padding: 10px 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(80, 137, 177, 0.401);
     max-width: 300px;
     z-index: 9999;
 }
